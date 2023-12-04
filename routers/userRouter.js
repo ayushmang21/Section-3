@@ -5,6 +5,7 @@ const Model = require('../models/userModel')
 const router = express.Router();
 
 router.post('/add', (req, res) => {
+    
     console.log(req.body);
 
     new Model(req.body).save()
@@ -17,7 +18,15 @@ router.post('/add', (req, res) => {
 });
 
 router.get('/getall', (req, res) => {
-    res.send('Response From Get All Route')
+
+    Model.find()
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.json(err);
+    });
+
 });
 
 router.get('/getbyemail', (req, res) => {
