@@ -5,7 +5,7 @@ const Model = require('../models/userModel')
 const router = express.Router();
 
 router.post('/add', (req, res) => {
-    
+
     console.log(req.body);
 
     new Model(req.body).save()
@@ -20,6 +20,19 @@ router.post('/add', (req, res) => {
 router.get('/getall', (req, res) => {
 
     Model.find()
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.json(err);
+    });
+
+});
+
+// : denotes url parameter
+router.get('/getbylocation/:location', (req, res) => {
+    console.log(req.params.location);
+    Model.find({ location : req.params.location})
     .then((result) => {
         res.json(result);
     }).catch((err) => {
