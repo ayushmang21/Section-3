@@ -42,20 +42,42 @@ router.get('/getbylocation/:location', (req, res) => {
 
 });
 
-router.get('/getbyemail', (req, res) => {
-    res.send('Response From Get All Route')
+router.get('/getbyemail/:email', (req, res) => {
+
+    Model.find({ email : req.params.email })
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.json(err);
+    });
 });
 
-router.get('/getbyid', (req, res) => {
-    res.send('Response From User Add Route')
+router.get('/getbyid/:_id', (req, res) => {
+    Model.find({ _id : req.params._id})
+    // Model.findById(req.params.id)
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.json(err);
+    });
 });
 
 router.get('/update', (req, res) => {
     res.send('Response From User Add Route')
 });
 
-router.get('/delete', (req, res) => {
-    res.send('Response From User Add Route')
+router.delete('/delete/:_id', (req, res) => {
+
+    Model.findByIdAndDelete(req.params._id)
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.json(err);
+    });
+
 });
 
 module.exports = router;

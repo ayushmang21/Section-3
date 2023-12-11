@@ -17,7 +17,15 @@ router.post('/add', (req, res) => {
 });
 
 router.get('/getall', (req, res) => {
-    res.send('Response From Get All Route')
+
+    Model.find()
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.json(err);
+    });
+    
 });
 
 router.get('/getbyemail', (req, res) => {

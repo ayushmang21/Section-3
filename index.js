@@ -10,7 +10,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use( '/user', UserRouter );
-app.use( '/user', PostRouter );
+app.use( '/post', PostRouter );
 
 // route
 app.get('/', (req, res) => {
