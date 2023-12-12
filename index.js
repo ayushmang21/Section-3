@@ -1,6 +1,7 @@
 const express = require('express');
 const UserRouter = require("./routers/userRouter");
 const PostRouter = require("./routers/postRouter");
+const cors = require('cors');
 
 const port = 5000;
 
@@ -9,6 +10,9 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(cors({
+    origin: ['http://localhost:5173']
+}));
 app.use( '/user', UserRouter );
 app.use( '/post', PostRouter );
 

@@ -13,7 +13,7 @@ router.post('/add', (req, res) => {
         res.json(result);
     }).catch((err) => {
         console.log(err);
-        res.json(err);
+        res.status(500).json(err);
     });
 });
 
@@ -24,7 +24,7 @@ router.get('/getall', (req, res) => {
         res.json(result);
     }).catch((err) => {
         console.log(err);
-        res.json(err);
+        res.status(500).json(err);
     });
 
 });
@@ -37,7 +37,7 @@ router.get('/getbylocation/:location', (req, res) => {
         res.json(result);
     }).catch((err) => {
         console.log(err);
-        res.json(err);
+        res.status(500).json(err);
     });
 
 });
@@ -49,7 +49,7 @@ router.get('/getbyemail/:email', (req, res) => {
         res.json(result);
     }).catch((err) => {
         console.log(err);
-        res.json(err);
+        res.status(500).json(err);
     });
 });
 
@@ -60,24 +60,24 @@ router.get('/getbyid/:_id', (req, res) => {
         res.json(result);
     }).catch((err) => {
         console.log(err);
-        res.json(err);
+        res.status(500).json(err);
     });
 });
 
-router.get('/update', (req, res) => {
-    res.send('Response From User Add Route')
-});
-
 router.delete('/delete/:_id', (req, res) => {
-
+    
     Model.findByIdAndDelete(req.params._id)
     .then((result) => {
         res.json(result);
     }).catch((err) => {
         console.log(err);
-        res.json(err);
+        res.status(500).json(err);
     });
+    
+});
 
+router.get('/update', (req, res) => {
+    res.send('Response From User Add Route')
 });
 
 module.exports = router;
