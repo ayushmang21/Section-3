@@ -1,7 +1,6 @@
 const express = require('express');
-const Model = require('../models/userModel')
+const Model = require('../models/productModel')
 
-// creating a router
 const router = express.Router();
 
 router.post('/add', (req, res) => {
@@ -9,53 +8,6 @@ router.post('/add', (req, res) => {
     console.log(req.body);
 
     new Model(req.body).save()
-    .then((result) => {
-        res.json(result);
-    }).catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-});
-
-router.get('/getall', (req, res) => {
-
-    Model.find()
-    .then((result) => {
-        res.json(result);
-    }).catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-
-});
-
-// : denotes url parameter
-router.get('/getbylocation/:location', (req, res) => {
-    console.log(req.params.location);
-    Model.find({ location : req.params.location})
-    .then((result) => {
-        res.json(result);
-    }).catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-
-});
-
-router.get('/getbyemail/:email', (req, res) => {
-
-    Model.find({ email : req.params.email })
-    .then((result) => {
-        res.json(result);
-    }).catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-});
-
-router.get('/getbyid/:_id', (req, res) => {
-    Model.find({ _id : req.params._id})
-    // Model.findById(req.params.id)
     .then((result) => {
         res.json(result);
     }).catch((err) => {
@@ -78,6 +30,65 @@ router.delete('/delete/:_id', (req, res) => {
 
 router.get('/update', (req, res) => {
     Model.findByIdAndUpdate(req.params._id)
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+router.get('/getall', (req, res) => {
+
+    Model.find()
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+
+});
+
+// : denotes url parameter
+router.get('/getbycategory/:category', (req, res) => {
+    console.log(req.params.category);
+    Model.find({ category : req.params.category})
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+
+});
+
+router.get('/getbycolor/:color', (req, res) => {
+
+    Model.find({ color : req.params.color })
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+router.get('/getbysize/:size', (req, res) => {
+
+    Model.find({ size : req.params.size })
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+router.get('/getbyid/:_id', (req, res) => {
+    
+    Model.find({ _id : req.params._id})
+    // Model.findById(req.params.id)
     .then((result) => {
         res.json(result);
     }).catch((err) => {

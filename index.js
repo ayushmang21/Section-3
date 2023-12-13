@@ -1,6 +1,7 @@
 const express = require('express');
 const UserRouter = require("./routers/userRouter");
 const PostRouter = require("./routers/postRouter");
+const ProductRouter = require("./routers/productRouter");
 const cors = require('cors');
 
 const port = 5000;
@@ -15,6 +16,7 @@ app.use(cors({
 }));
 app.use( '/user', UserRouter );
 app.use( '/post', PostRouter );
+app.use( '/product', ProductRouter );
 
 // route
 app.get('/', (req, res) => {
