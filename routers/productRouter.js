@@ -85,6 +85,17 @@ router.get('/getbysize/:size', (req, res) => {
     });
 });
 
+router.get('/getbyprice/:price', (req, res) => {
+
+    Model.find({ price : req.params.price })
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 router.get('/getbyid/:_id', (req, res) => {
     
     Model.find({ _id : req.params._id})
