@@ -31,7 +31,9 @@ router.get('/getall', (req, res) => {
 
 // : denotes url parameter
 router.get('/getbylocation/:location', (req, res) => {
+
     console.log(req.params.location);
+
     Model.find({ location : req.params.location})
     .then((result) => {
         res.json(result);
@@ -51,21 +53,23 @@ router.get('/getbyemail/:email', (req, res) => {
         console.log(err);
         res.status(500).json(err);
     });
+
 });
 
 router.get('/getbyid/:_id', (req, res) => {
-    Model.find({ _id : req.params._id})
     // Model.findById(req.params.id)
+    Model.find({ _id : req.params._id})
     .then((result) => {
         res.json(result);
     }).catch((err) => {
         console.log(err);
         res.status(500).json(err);
     });
+
 });
 
 router.delete('/delete/:_id', (req, res) => {
-    
+
     Model.findByIdAndDelete(req.params._id)
     .then((result) => {
         res.json(result);
@@ -76,7 +80,8 @@ router.delete('/delete/:_id', (req, res) => {
     
 });
 
-router.get('/update', (req, res) => {
+router.get('/update/:_id', (req, res) => {
+
     Model.findByIdAndUpdate(req.params._id)
     .then((result) => {
         res.json(result);
@@ -84,6 +89,7 @@ router.get('/update', (req, res) => {
         console.log(err);
         res.status(500).json(err);
     });
+
 });
 
 module.exports = router;

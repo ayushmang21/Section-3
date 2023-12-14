@@ -5,6 +5,7 @@ const Model = require('../models/postModel')
 const router = express.Router();
 
 router.post('/add', (req, res) => {
+
     console.log(req.body);
 
     new Model(req.body).save()
@@ -12,7 +13,7 @@ router.post('/add', (req, res) => {
         res.json(result);
     }).catch((err) => {
         console.log(err);
-        res.json(err);
+        res.status(500).json(err);
     });
 });
 
@@ -23,25 +24,83 @@ router.get('/getall', (req, res) => {
         res.json(result);
     }).catch((err) => {
         console.log(err);
-        res.json(err);
+        res.status(500).json(err);
     });
     
 });
 
-router.get('/getbyemail', (req, res) => {
-    res.send('Response From Get All Route')
+router.get('/getbysender/:sender', (req, res) => {
+
+    console.log(req.params.sender);
+
+    Model.find({ sender : req.params.sender})
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+
 });
 
-router.get('/getbyid', (req, res) => {
-    res.send('Response From User Add Route')
+router.get('/getbycontent/:content', (req, res) => {
+
+    Model.find({ content : req.params.content})
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+
 });
 
-router.get('/update', (req, res) => {
-    res.send('Response From User Add Route')
+router.get('/getbyimage/:image', (req, res) => {
+
+    Model.find({ image : req.params.image})
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+
 });
 
-router.get('/delete', (req, res) => {
-    res.send('Response From User Add Route')
+router.get('/getbyid/:_id', (req, res) => {
+    
+    Model.find({ _id : req.params._id})
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+
+});
+
+router.get('/update/:_id', (req, res) => {
+    
+    Model.findByIdAndUpdate(req.params._id)
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+
+});
+
+router.get('/delete/:_id', (req, res) => {
+    
+    Model.findByIdAndDelete(req.params._id)
+    .then((result) => {
+        res.json(result);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+    
 });
 
 module.exports = router;
