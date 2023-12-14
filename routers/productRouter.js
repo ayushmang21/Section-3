@@ -28,7 +28,7 @@ router.delete('/delete/:_id', (req, res) => {
     
 });
 
-router.get('/update', (req, res) => {
+router.get('/update/:_id', (req, res) => {
     Model.findByIdAndUpdate(req.params._id)
     .then((result) => {
         res.json(result);
@@ -98,8 +98,8 @@ router.get('/getbyprice/:price', (req, res) => {
 
 router.get('/getbyid/:_id', (req, res) => {
     
-    Model.find({ _id : req.params._id})
     // Model.findById(req.params.id)
+    Model.find({ _id : req.params._id})
     .then((result) => {
         res.json(result);
     }).catch((err) => {
