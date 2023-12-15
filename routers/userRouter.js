@@ -11,7 +11,8 @@ router.post('/add', (req, res) => {
     new Model(req.body).save()
     .then((result) => {
         res.json(result);
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log(err);
         res.status(500).json(err);
     });
@@ -22,7 +23,8 @@ router.get('/getall', (req, res) => {
     Model.find()
     .then((result) => {
         res.json(result);
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log(err);
         res.status(500).json(err);
     });
@@ -37,7 +39,8 @@ router.get('/getbylocation/:location', (req, res) => {
     Model.find({ location : req.params.location})
     .then((result) => {
         res.json(result);
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log(err);
         res.status(500).json(err);
     });
@@ -49,7 +52,8 @@ router.get('/getbyemail/:email', (req, res) => {
     Model.find({ email : req.params.email })
     .then((result) => {
         res.json(result);
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log(err);
         res.status(500).json(err);
     });
@@ -61,31 +65,34 @@ router.get('/getbyid/:_id', (req, res) => {
     Model.find({ _id : req.params._id})
     .then((result) => {
         res.json(result);
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log(err);
         res.status(500).json(err);
     });
 
 });
 
-router.delete('/delete/:_id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
 
-    Model.findByIdAndDelete(req.params._id)
+    Model.findByIdAndDelete(req.params.id)
     .then((result) => {
         res.json(result);
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log(err);
         res.status(500).json(err);
     });
     
 });
 
-router.get('/update/:_id', (req, res) => {
+router.put('/update/:id', (req, res) => {
 
-    Model.findByIdAndUpdate(req.params._id)
+    Model.findByIdAndUpdate(req.params.id, req.body)
     .then((result) => {
         res.json(result);
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log(err);
         res.status(500).json(err);
     });
