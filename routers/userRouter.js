@@ -60,9 +60,9 @@ router.get('/getbyemail/:email', (req, res) => {
 
 });
 
-router.get('/getbyid/:_id', (req, res) => {
-    // Model.findById(req.params.id)
-    Model.find({ _id : req.params._id})
+router.get('/getbyid/:id', (req, res) => {
+    Model.findById(req.params.id)
+    // Model.find({ _id : req.params.id})
     .then((result) => {
         res.json(result);
     })
